@@ -1,0 +1,55 @@
+ID: 101
+Name: kalai
+Dept: cse
+Internal: 5
+External: 0
+Total: 5
+Attendance: 0.0%
+Fee: 2.0 | Paid
+Result: Fail
+Course: 1
+----------------------
+ID: 101
+Name: kalai
+Dept: cse
+Internal: 50
+External: 80
+Total: 130
+Attendance: 90.0%
+Fee: 5000.0 | Paid
+Result: Pass
+Course: java
+----------------------
+ID: 101
+Name: kpr
+Dept: cse
+Internal: 50
+External: 60
+Total: 110
+Attendance: 80.0%
+Fee: 30000.0 | Paid
+Result: Pass
+Course: daa
+----------------------
+ID: 1
+Name: karpaga
+Dept: CSE
+Internal: 25
+External: 40
+Total: 65
+Attendance: 90.0%
+Fee: 50000.0 | Paid
+Result: Pass
+Course: java
+----------------------
+ID: 2
+Name: kpr
+Dept: cse
+Internal: 30
+External: 40
+Total: 70
+Attendance: 90.0%
+Fee: 400.0 | Paid
+Result: Pass
+Course: java
+----------------------

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>SIMS - Student Detail</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar">
+  <a class="brand" th:href="@{/}"><div class="brand-icon">&#127891;</div>SI<span>MS</span></a>
+  <div class="nav-right">
+    <a th:href="@{/students/edit/{i}(i=${student.studentId})}" class="btn btn-o">&#9998; Edit</a>
+    <a th:href="@{/students}" class="btn btn-o">&#8592; Back</a>
+  </div>
+</nav>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="av" th:text="${#strings.substring(student.studentName,0,1)}">A</div>
+    <div class="hi">
+      <h2 th:text="${student.studentName}">Name</h2>
+      <div class="meta">
+        ID:&nbsp;<strong th:text="${student.studentId}"></strong>
+        &nbsp;&middot;&nbsp;Dept:&nbsp;<strong th:text="${student.department}"></strong>
+        &nbsp;&middot;&nbsp;
+        <span class="badge" th:classappend="${student.result.resultStatus=='Pass'?'b-pass':'b-fail'}"
+              th:text="${student.result.resultStatus}"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dgrid">
+    <div class="dc">
+      <div class="dc-h">Marks</div>
+      <div class="dc-b">
+        <div class="dr"><span class="k">Internal</span><span class="v" th:text="${student.marks.internal}"></span></div>
+        <div class="dr"><span class="k">External</span><span class="v" th:text="${student.marks.external}"></span></div>
+        <div class="dr"><span class="k">Total</span>
+          <span class="v" style="font-family:'Syne',sans-serif" th:text="${student.marks.getTotal()}+' / 200'"></span>
+        </div>
+        <div class="pw"><div class="pb" th:classappend="${student.marks.getTotal()>=50?'pb-bl':'pb-rd'}"
+             th:style="'width:'+${student.marks.getTotal()/2.0}+'%'"></div></div>
+      </div>
+    </div>
+
+    <div class="dc">
+      <div class="dc-h">Attendance</div>
+      <div class="dc-b">
+        <div class="dr"><span class="k">Total Classes</span><span class="v" th:text="${student.attendance.totalClass}"></span></div>
+        <div class="dr"><span class="k">Present</span><span class="v" th:text="${student.attendance.present}"></span></div>
+        <div class="dr"><span class="k">Percentage</span>
+          <span class="v" th:text="${#numbers.formatDecimal(student.attendance.calcPercentage(),1,1)}+'%'"></span>
+        </div>
+        <div class="pw"><div class="pb" th:classappend="${student.attendance.calcPercentage()>=75?'pb-gn':'pb-rd'}"
+             th:style="'width:'+${student.attendance.calcPercentage()}+'%'"></div></div>
+      </div>
+    </div>
+
+    <div class="dc">
+      <div class="dc-h">Fee</div>
+      <div class="dc-b">
+        <div class="dr"><span class="k">Amount</span><span class="v" th:text="'Rs. '+${student.fee.amount}"></span></div>
+        <div class="dr"><span class="k">Status</span>
+          <span class="badge" th:classappend="${student.fee.feeStatus=='Paid'?'b-paid':'b-unpd'}"
+                th:text="${student.fee.feeStatus}"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dc">
+      <div class="dc-h">Result</div>
+      <div class="dc-b">
+        <div class="dr"><span class="k">Status</span>
+          <span class="badge" th:classappend="${student.result.resultStatus=='Pass'?'b-pass':'b-fail'}"
+                th:text="${student.result.resultStatus}"></span>
+        </div>
+        <div class="dr"><span class="k">Pass Threshold</span><span class="v">50 / 200</span></div>
+      </div>
+    </div>
+
+    <div class="dc">
+      <div class="dc-h">Courses</div>
+      <div class="dc-b">
+        <p th:if="${#lists.isEmpty(student.courses)}" style="color:var(--mu);font-size:.86rem">No courses enrolled.</p>
+        <span th:each="c : ${student.courses}" class="ctag"
+              th:text="'#'+${c.courseId}+' '+${c.courseName}"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <a th:href="@{/students/delete/{i}(i=${student.studentId})}"
+       class="btn btn-d" onclick="return confirm('Delete this student?')">
+      &#128465; Delete Student
+    </a>
+  </div>
+</div>
+</body>
+</html>
